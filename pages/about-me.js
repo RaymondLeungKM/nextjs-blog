@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import React from "react";
+import Image from "next/image";
 
 export default function AboutMe({ apiBaseUrl, techStacks, softwareList }) {
-
   // Add photo
   // Utilize the strapi CMS as much as possible, so that we can easily add content to the page later on
   // Java: Spring, Maven, Kafka
@@ -17,7 +17,7 @@ export default function AboutMe({ apiBaseUrl, techStacks, softwareList }) {
   // Three.js? <= is that a bit unnecessary?
   //
 
-  const list2Delay = 0.5 + techStacks.data.length*0.3;
+  const list2Delay = 0.5 + techStacks.data.length * 0.3;
 
   const list = {
     hidden: { opacity: 1, scale: 0 },
@@ -58,7 +58,18 @@ export default function AboutMe({ apiBaseUrl, techStacks, softwareList }) {
       animate={{ opacity: 1, scale: 1 }}
     >
       <h1>Something interesting about me~~</h1>
-      <p>Hi, I am Raymond, a frontend developer who is working on his way to become a fullstack developer.</p>
+      <p>
+        Hi, I am Raymond, a frontend developer who is working on his way to
+        become a fullstack developer.
+      </p>
+      <div className="profile-pic-container absolute rounded-full h-[300px] w-[300px] overflow-hidden right-12 top-24">
+        <Image
+          src="/static/images/profile_pic.jpg"
+          alt="profile-pic"
+          width={300}
+          height={400}
+        />
+      </div>
       <br></br>
       <p>Academic Qualifications:</p>
       <p>2012-2016</p>
@@ -80,7 +91,11 @@ export default function AboutMe({ apiBaseUrl, techStacks, softwareList }) {
         animate="visible"
       >
         {techStacks.data.map((stack) => (
-          <motion.li key={stack.id} className="tech-stack-item" variants={teckStack}>
+          <motion.li
+            key={stack.id}
+            className="tech-stack-item"
+            variants={teckStack}
+          >
             <p className="text-center">{stack.attributes.name}</p>
             <div className="logo shadow-2xl rounded-full w-40 h-40 overflow-hidden grid place-items-center">
               <img
@@ -100,7 +115,11 @@ export default function AboutMe({ apiBaseUrl, techStacks, softwareList }) {
         animate="visible"
       >
         {softwareList.data.map((software) => (
-          <motion.li key={software.id} className="software-item" variants={teckStack}>
+          <motion.li
+            key={software.id}
+            className="software-item"
+            variants={teckStack}
+          >
             <p className="text-center">{software.attributes.name}</p>
             <div className="logo shadow-2xl rounded-full w-40 h-40 overflow-hidden grid place-items-center">
               <img
@@ -137,7 +156,7 @@ export async function getStaticProps() {
     props: {
       apiBaseUrl,
       techStacks,
-      softwareList
+      softwareList,
     },
   };
 }
