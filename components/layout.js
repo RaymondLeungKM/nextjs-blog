@@ -1,4 +1,8 @@
-import Navbar from "./navbar";
+import dynamic from "next/dynamic";
+const DynamicNavbar = dynamic(() => import("./navbar"), {
+  ssr: false,
+});
+
 import Head from "next/head";
 
 export default function Layout({ children }) {
@@ -8,7 +12,7 @@ export default function Layout({ children }) {
         <title>Next.js blog</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Navbar />
+      <DynamicNavbar />
       <main>{children}</main>
     </>
   );

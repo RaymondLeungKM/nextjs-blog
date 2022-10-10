@@ -1,6 +1,30 @@
 import { motion } from "framer-motion";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import {
+  Heading,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  ModalFooter,
+  Button,
+  useDisclosure,
+  Text,
+  Box,
+  Flex,
+  Center,
+  VStack,
+  Divider,
+  List,
+  ListItem,
+  ListIcon,
+  SimpleGrid,
+} from "@chakra-ui/react";
+
+import { MdCheckCircle } from "react-icons/md";
 
 export default function AboutMe({ apiBaseUrl, techStacks, softwareList }) {
   // Add photo
@@ -15,9 +39,10 @@ export default function AboutMe({ apiBaseUrl, techStacks, softwareList }) {
   // Linux and Putty
   // Animation or page loading / scrolling effects? Maybe even add some interactive elements
   // Three.js? <= is that a bit unnecessary?
-  //
 
-  const list2Delay = 0.5 + techStacks.data.length * 0.3;
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [modalTitle, setModalTitle] = useState("");
+  const [modalBody, setModalBody] = useState("");
 
   const list = {
     hidden: { opacity: 1, scale: 0 },
@@ -26,7 +51,7 @@ export default function AboutMe({ apiBaseUrl, techStacks, softwareList }) {
       scale: 1,
       transition: {
         delayChildren: 0.3,
-        staggerChildren: 0.3,
+        staggerChildren: 0.15,
       },
     },
   };
@@ -45,92 +70,222 @@ export default function AboutMe({ apiBaseUrl, techStacks, softwareList }) {
       opacity: 1,
       scale: 1,
       transition: {
-        delayChildren: list2Delay,
-        staggerChildren: 0.3,
+        // delayChildren: list2Delay,
+        delayChildren: 1,
+        staggerChildren: 0.1,
       },
     },
   };
 
-  return (
-    <motion.div
-      className="detail px-4 py-8"
-      initial={{ opacity: 0, scale: 0.5 }}
-      animate={{ opacity: 1, scale: 1 }}
-    >
-      <h1>Something interesting about me~~</h1>
-      <p>
-        Hi, I am Raymond, a frontend developer who is working on his way to
-        become a fullstack developer.
-      </p>
-      <div className="profile-pic-container absolute rounded-full h-[300px] w-[300px] overflow-hidden right-12 top-24">
-        <Image
-          src="/static/images/profile_pic.jpg"
-          alt="profile-pic"
-          width={300}
-          height={400}
-        />
-      </div>
-      <br></br>
-      <p>Academic Qualifications:</p>
-      <p>2012-2016</p>
-      <p>University of Hong Kong: Bachelor of Science (Majoring in Physics)</p>
-      <br></br>
-      <p>Working Experience:</p>
-      <p>2016 Jul - 2019 Feb</p>
-      <p>Multiable Company - Senior System Support Executive</p>
-      <p>2019 Mar - 2020 Jul</p>
-      <p>Goldenway Company - System Analyst</p>
-      <p>2020 Aug - Now</p>
-      <p>Reel Fintech Limited - Frontend Developer</p>
-      <br></br>
-      <p>Technologies I know:</p>
-      <motion.ul
-        className="tech-stack-list grid grid-cols-3 gap-4 place-items-center"
-        variants={list}
-        initial="hidden"
-        animate="visible"
-      >
-        {techStacks.data.map((stack) => (
-          <motion.li
-            key={stack.id}
-            className="tech-stack-item"
-            variants={teckStack}
-          >
-            <p className="text-center">{stack.attributes.name}</p>
-            <div className="logo shadow-2xl rounded-full w-40 h-40 overflow-hidden grid place-items-center">
-              <img
-                className="w-3/5 hover:scale-150 duration-500"
-                src={apiBaseUrl + stack.attributes.logo.data.attributes.url}
-              />
-            </div>
-          </motion.li>
-        ))}
-      </motion.ul>
+  const workingExp = [
+    {
+      period: "2016 Jul - 2019 Feb",
+      desc: "Multiable Company - Senior System Support Executive",
+    },
+    {
+      period: "2019 Mar - 2020 Jul",
+      desc: "Goldenway Company - System Analyst",
+    },
+    {
+      period: "2020 Aug - Now",
+      desc: "Reel Fintech Limited - Frontend Developer",
+    },
+  ];
 
-      <p className="mt-12">Softwares I am familiar with:</p>
-      <motion.ul
-        className="software-list grid grid-cols-3 gap-4 place-items-center"
-        variants={list2}
-        initial="hidden"
-        animate="visible"
+  const personalities = [
+    "A team-worker, can work under pressure and fast-paced environment",
+    "A fast learner🧑🏻‍💻, obedient, creative, friendly",
+    "Fascinated with technology, gadgets📱 and cars🚗!",
+    "A Coffee Lover!!",
+  ];
+
+  const showStackDetail = (stack) => {
+    if (stack.attributes.name === "Java") {
+      setModalTitle("Java sub skillset");
+      setModalBody(<>Sthing in here!!!</>);
+      onOpen();
+    }
+  };
+
+  return (
+    <>
+      <motion.div
+        layout
+        className="px-4 pt-8"
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: 1, scale: 1 }}
       >
-        {softwareList.data.map((software) => (
-          <motion.li
-            key={software.id}
-            className="software-item"
-            variants={teckStack}
-          >
-            <p className="text-center">{software.attributes.name}</p>
-            <div className="logo shadow-2xl rounded-full w-40 h-40 overflow-hidden grid place-items-center">
-              <img
-                className="w-3/5 hover:scale-150 duration-500"
-                src={apiBaseUrl + software.attributes.logo.data.attributes.url}
-              />
-            </div>
-          </motion.li>
-        ))}
-      </motion.ul>
-    </motion.div>
+        <Heading>Something interesting about me~~</Heading>
+        <Text>
+          Hi, I am Raymond, a frontend developer who is working on his way to
+          become a fullstack developer.
+        </Text>
+        <Box className="profile-pic-container absolute rounded-full h-[200px] w-[200px] overflow-hidden right-12 top-24">
+          <Image
+            src="/static/images/profile_pic.jpg"
+            alt="profile-pic"
+            width={200}
+            height={266}
+            priority
+          />
+        </Box>
+        <Heading className="my-12 text-center text-5xl">
+          Academic Qualifications:
+        </Heading>
+        <Flex className="flex flex-col items-center">
+          <Text>2012-2016</Text>
+          <Text className="ml-4">
+            University of Hong Kong: Bachelor of Science (Majoring in Physics)
+          </Text>
+        </Flex>
+
+        <Center h="100vh">
+          <VStack>
+            <Heading className="my-12 text-center text-5xl">
+              Working Experience:
+            </Heading>
+            <Flex className="flex flex-col">
+              {workingExp.map((exp, index) => (
+                <Flex className="flex flex-col items-center" key={index}>
+                  <Text>{exp.period}</Text>
+                  <Text>{exp.desc}</Text>
+                  {index < workingExp.length - 1 && (
+                    <Divider
+                      orientation="vertical"
+                      minH="100px"
+                      borderLeftWidth="3px"
+                    />
+                  )}
+                </Flex>
+              ))}
+            </Flex>
+          </VStack>
+        </Center>
+
+        <Box height="100vh">
+          <Heading textAlign="center">""Technologies I know:</Heading>
+          <Flex h="100%" alignItems="center">
+            <motion.ul
+              layout
+              className="tech-stack-list grid grid-cols-3 gap-40 place-items-center w-full"
+              variants={list}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              {techStacks.data.map((stack) => (
+                <motion.li
+                  layout
+                  key={stack.id}
+                  className="tech-stack-item"
+                  variants={teckStack}
+                >
+                  <Text className="text-center">{stack.attributes.name}</Text>
+                  <Box
+                    className="logo shadow-2xl dark:shadow-cyan-900 dark:bg-gray-900 rounded-[50%] w-40 h-40 overflow-hidden grid place-items-center hover:rounded-3xl transition-all duration-500 ease-in-out cursor-pointer"
+                    onClick={() => showStackDetail(stack)}
+                  >
+                    <img
+                      className="w-3/5 hover:scale-150 duration-500"
+                      src={
+                        apiBaseUrl + stack.attributes.logo.data.attributes.url
+                      }
+                    />
+                  </Box>
+                </motion.li>
+              ))}
+            </motion.ul>
+          </Flex>
+        </Box>
+
+        <Box height="100vh">
+          <Heading className="mt-12">Softwares I am familiar with:</Heading>
+          <Flex h="100%" alignItems="center">
+            <motion.ul
+              layout
+              className="software-list grid grid-cols-3 gap-4 place-items-center w-full"
+              variants={list2}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              {softwareList.data.map((software) => (
+                <motion.li
+                  layout
+                  key={software.id}
+                  className="software-item"
+                  variants={teckStack}
+                >
+                  <Text className="text-center">
+                    {software.attributes.name}
+                  </Text>
+                  <Box className="logo shadow-2xl dark:shadow-cyan-900 dark:bg-gray-900 rounded-[50%] w-40 h-40 overflow-hidden grid place-items-center hover:rounded-3xl transition-all duration-500 ease-in-out">
+                    <img
+                      className="w-3/5 hover:scale-150 duration-500"
+                      src={
+                        apiBaseUrl +
+                        software.attributes.logo.data.attributes.url
+                      }
+                    />
+                  </Box>
+                </motion.li>
+              ))}
+            </motion.ul>
+          </Flex>
+        </Box>
+
+        <Box height="100vh">
+          <Heading pt="4" mb="8">
+            I am ...
+          </Heading>
+          <List>
+            {personalities.map((pers) => (
+              <ListItem fontSize="1.5rem" py="4">
+                <ListIcon as={MdCheckCircle} color="green.500" />
+                {pers}
+              </ListItem>
+            ))}
+          </List>
+          <Box className="mt-4">
+            <Heading mb="8">Coffee gear wishlist:</Heading>
+            <SimpleGrid className="gears-list" columns="2" spacing="10" placeItems="center">
+              <Box className="item1">
+                <Text>Grinder: Niche Zero</Text>
+                <Image
+                  src="/static/images/niche_zero_white.webp"
+                  alt="profile-pic"
+                  width={300}
+                  height={300}
+                />
+              </Box>
+              <Box className="item2">
+                <Text>Espresso Maker: Profitec Pro 500</Text>
+                <Image
+                  src="/static/images/pro_500.jpeg"
+                  alt="profile-pic"
+                  width={320}
+                  height={206}
+                />
+              </Box>
+            </SimpleGrid>
+          </Box>
+        </Box>
+      </motion.div>
+      <Modal onClose={onClose} isOpen={isOpen} size={"xl"} isCentered>
+        <ModalOverlay
+          bg="blackAlpha.300"
+          backdropFilter="blur(10px) hue-rotate(90deg)"
+        />
+        <ModalContent>
+          <ModalHeader>{modalTitle}</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>{modalBody}</ModalBody>
+          <ModalFooter>
+            <Button onClick={onClose}>Close</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
   );
 }
 
@@ -139,7 +294,7 @@ export async function getStaticProps() {
   const res = await fetch(`${apiBaseUrl}/api/Skills?populate=*`, {
     headers: {
       Authorization:
-        "Bearer 97b096bd56ef183d13f73ef83431a7f7dcd98641d92335b442bf94a3f907087bf5b7be79da0100e24b74261aeb68311cf49f403eb34e8a69f3176d6395f5f6843f56920d247e539d4d9afdc0db14b4a34530f36a70aef7c185eb0bf2bec190317954f6f8d6cc844a8204f56f58ff1e3fbd1c4d3e4c8ca2f9bf4a1cc629f0345b",
+        "Bearer 75d6251a970ae2df91155ef73012b391bae96e1a721dec76144bdabddc95c2aada9d4ea4d07f19b3bf49f4e5a6cc0a4a657b4be1b0b07a3351a834c1be075803bbe335c790887983e46bd85486ce7d0c3363457e3eaa218f0791cabf5fd72bca10f760e4d41032ef3ef16a61a03bd2ce0fe3a7e4649efe894f7efb07702a362e",
     },
   });
   const techStacks = await res.json();
@@ -147,7 +302,7 @@ export async function getStaticProps() {
   const res2 = await fetch(`${apiBaseUrl}/api/Softwares?populate=*`, {
     headers: {
       Authorization:
-        "Bearer 97b096bd56ef183d13f73ef83431a7f7dcd98641d92335b442bf94a3f907087bf5b7be79da0100e24b74261aeb68311cf49f403eb34e8a69f3176d6395f5f6843f56920d247e539d4d9afdc0db14b4a34530f36a70aef7c185eb0bf2bec190317954f6f8d6cc844a8204f56f58ff1e3fbd1c4d3e4c8ca2f9bf4a1cc629f0345b",
+        "Bearer 75d6251a970ae2df91155ef73012b391bae96e1a721dec76144bdabddc95c2aada9d4ea4d07f19b3bf49f4e5a6cc0a4a657b4be1b0b07a3351a834c1be075803bbe335c790887983e46bd85486ce7d0c3363457e3eaa218f0791cabf5fd72bca10f760e4d41032ef3ef16a61a03bd2ce0fe3a7e4649efe894f7efb07702a362e",
     },
   });
   const softwareList = await res2.json();

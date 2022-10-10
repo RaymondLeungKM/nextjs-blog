@@ -5,3 +5,8 @@
 * {
     font-family: 'Poppins', sans-serif;
 }
+
+/* Post Detail */
+.detail p {
+    margin: 1rem 0;
+}

@@ -1,16 +1,24 @@
 import "../styles/globals.css";
-import "tailwindcss/tailwind.css";
 
+import { wrapper, store } from "../store/store";
+import { Provider } from "react-redux";
 import Layout from "../components/layout";
-import { ThemeProvider } from "next-themes";
+import { ChakraProvider } from "@chakra-ui/react";
+import theme from "../utils/theme";
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, ...rest }) {
+  const { store, props } = wrapper.useWrappedStore(rest);
+
   return (
-    <ThemeProvider attribute="class">
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </ThemeProvider>
+    <>
+      <ChakraProvider theme={theme}>
+        <Provider store={store}>
+          <Layout>
+            <Component {...props.pageProps} />
+          </Layout>
+        </Provider>
+      </ChakraProvider>
+    </>
   );
 }
 
