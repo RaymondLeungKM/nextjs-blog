@@ -13,7 +13,7 @@ export default function Layout({ children }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <DynamicNavbar />
-      <main>{children}</main>
+      <main className="py-4 px-8">{children}</main>
     </>
   );
 }

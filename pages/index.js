@@ -34,7 +34,7 @@ export default function Home({ apiBaseUrl, posts }) {
   }, [query, setFilteredPosts]);
 
   return (
-    <div className="home py-4 px-8">
+    <div className="home">
       <div className="page-content">
         <div className="posts-section">
           <Heading className="text-4xl mb-4 font-bold">Posts</Heading>

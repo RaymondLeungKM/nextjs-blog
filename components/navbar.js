@@ -37,6 +37,7 @@ export default function Navbar() {
   const dispatch = useDispatch();
   const [showToast, setShowToast] = useState(false);
   const logoutHandler = () => {
+    router.push("/");
     dispatch(authActions.logout());
     toast({
       title: 'Logout Successfully',
@@ -134,6 +135,9 @@ export default function Navbar() {
           <li>
             <Link href="/about-me">About Me</Link>
           </li>
+          <li>
+            <Link href="/coffee">Coffee</Link>
+          </li>
         </ul>
         <ul className="rightMenu right-0 flex gap-4 items-center">
           <li className="h-7">
@@ -205,11 +209,14 @@ export default function Navbar() {
               </svg>
               <div className="logo text-center mt-8">BLOG</div>
               <ul className="grid place-items-center h-[95vh]">
-                <li onClick={() => closeMobileMenuHandler()}>
+                <li onClick={closeMobileMenuHandler}>
                   <Link href="/">Home</Link>
                 </li>
-                <li onClick={() => closeMobileMenuHandler()}>
+                <li onClick={closeMobileMenuHandler}>
                   <Link href="/about-me">About Me</Link>
+                </li>
+                <li onClick={closeMobileMenuHandler}>
+                  <Link href="/about-me">Coffee</Link>
                 </li>
                 <li className="h-7">
                   <Button size="xs" onClick={toggleColorMode}>
@@ -218,19 +225,19 @@ export default function Navbar() {
                 </li>
                 {!jwt ? (
                   <>
-                    <li onClick={() => closeMobileMenuHandler()}>
+                    <li onClick={closeMobileMenuHandler}>
                       <Link href="/login">Login</Link>
                     </li>
-                    <li onClick={() => closeMobileMenuHandler()}>
+                    <li onClick={closeMobileMenuHandler}>
                       <Link href="/signup">Signup</Link>
                     </li>
                   </>
                 ) : (
                   <>
-                    <li onClick={() => closeMobileMenuHandler()}>
+                    <li onClick={closeMobileMenuHandler}>
                       <Link href="/createPost">Create Post</Link>
                     </li>
-                    <li onClick={() => closeMobileMenuHandler()}>
+                    <li onClick={closeMobileMenuHandler}>
                       <Link href="/user">My Profile</Link>
                     </li>
                     <li onClick={onOpen}>Logout</li>

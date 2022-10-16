@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
+// import Image from "next/image";
 import {
   Heading,
   Modal,
@@ -22,6 +22,8 @@ import {
   ListItem,
   ListIcon,
   SimpleGrid,
+  Image,
+  Link,
 } from "@chakra-ui/react";
 
 import { MdCheckCircle } from "react-icons/md";
@@ -111,59 +113,76 @@ export default function AboutMe({ apiBaseUrl, techStacks, softwareList }) {
     <>
       <motion.div
         layout
-        className="px-4 pt-8"
         initial={{ opacity: 0, scale: 0.5 }}
         animate={{ opacity: 1, scale: 1 }}
       >
-        <Heading>Something interesting about me~~</Heading>
-        <Text>
-          Hi, I am Raymond, a frontend developer who is working on his way to
-          become a fullstack developer.
-        </Text>
-        <Box className="profile-pic-container absolute rounded-full h-[200px] w-[200px] overflow-hidden right-12 top-24">
-          <Image
-            src="/static/images/profile_pic.jpg"
-            alt="profile-pic"
-            width={200}
-            height={266}
-            priority
-          />
-        </Box>
-        <Heading className="my-12 text-center text-5xl">
-          Academic Qualifications:
-        </Heading>
-        <Flex className="flex flex-col items-center">
-          <Text>2012-2016</Text>
-          <Text className="ml-4">
-            University of Hong Kong: Bachelor of Science (Majoring in Physics)
-          </Text>
+        {/* Part 1 */}
+        <Flex h="100vh" id="part-1">
+          <Center w="40vw">
+            <VStack>
+              <Heading alignSelf="flex-start">Hi, I am Raymond,</Heading>
+              <Text>
+                a frontend developer who is working on his way to become a
+                fullstack developer.
+              </Text>
+              <Link href="#part-2" alignSelf="flex-start"><Button>Explore</Button></Link>
+            </VStack>
+          </Center>
+          <Center w="60vw">
+            <Image src="/static/images/hero_pic.png" alt="hero-pic" h="600px" />
+          </Center>
         </Flex>
 
-        <Center h="100vh">
-          <VStack>
+        {/* Part 2 */}
+        <Flex h="100vh" justifyContent="space-evenly" alignItems="center" id="part-2">
+          <Box>
+            <Image
+              src="/static/images/profile_pic.jpg"
+              alt="profile-pic"
+              width="240px"
+              height="240px"
+              borderRadius="100%"
+              objectFit="cover"
+            />
+          </Box>
+          <Box>
             <Heading className="my-12 text-center text-5xl">
-              Working Experience:
+              Academic Qualifications:
             </Heading>
-            <Flex className="flex flex-col">
-              {workingExp.map((exp, index) => (
-                <Flex className="flex flex-col items-center" key={index}>
-                  <Text>{exp.period}</Text>
-                  <Text>{exp.desc}</Text>
-                  {index < workingExp.length - 1 && (
-                    <Divider
-                      orientation="vertical"
-                      minH="100px"
-                      borderLeftWidth="3px"
-                    />
-                  )}
-                </Flex>
-              ))}
+            <Flex className="flex flex-col items-center">
+              <Text>2012-2016</Text>
+              <Text className="ml-4">
+                University of Hong Kong: Bachelor of Science (Majoring in
+                Physics)
+              </Text>
             </Flex>
-          </VStack>
-        </Center>
+          </Box>
+          <Box>
+            <VStack>
+              <Heading className="my-12 text-center text-5xl">
+                Working Experience:
+              </Heading>
+              <Flex className="flex flex-col">
+                {workingExp.map((exp, index) => (
+                  <Flex className="flex flex-col items-center" key={index}>
+                    <Text>{exp.period}</Text>
+                    <Text>{exp.desc}</Text>
+                    {index < workingExp.length - 1 && (
+                      <Divider
+                        orientation="vertical"
+                        minH="100px"
+                        borderLeftWidth="3px"
+                      />
+                    )}
+                  </Flex>
+                ))}
+              </Flex>
+            </VStack>
+          </Box>
+        </Flex>
 
         <Box height="100vh">
-          <Heading textAlign="center">""Technologies I know:</Heading>
+          <Heading textAlign="center">Technologies I know:</Heading>
           <Flex h="100%" alignItems="center">
             <motion.ul
               layout
@@ -239,8 +258,8 @@ export default function AboutMe({ apiBaseUrl, techStacks, softwareList }) {
             I am ...
           </Heading>
           <List>
-            {personalities.map((pers) => (
-              <ListItem fontSize="1.5rem" py="4">
+            {personalities.map((pers, index) => (
+              <ListItem fontSize="1.5rem" py="4" key={index}>
                 <ListIcon as={MdCheckCircle} color="green.500" />
                 {pers}
               </ListItem>
@@ -248,23 +267,34 @@ export default function AboutMe({ apiBaseUrl, techStacks, softwareList }) {
           </List>
           <Box className="mt-4">
             <Heading mb="8">Coffee gear wishlist:</Heading>
-            <SimpleGrid className="gears-list" columns="2" spacing="10" placeItems="center">
+            <SimpleGrid
+              className="gears-list"
+              columns="2"
+              spacing="10"
+              placeItems="center"
+            >
               <Box className="item1">
-                <Text>Grinder: Niche Zero</Text>
+                <Text align="center" mb="4">
+                  Grinder: Niche Zero
+                </Text>
                 <Image
                   src="/static/images/niche_zero_white.webp"
                   alt="profile-pic"
                   width={300}
                   height={300}
+                  className="rounded-full"
                 />
               </Box>
               <Box className="item2">
-                <Text>Espresso Maker: Profitec Pro 500</Text>
+                <Text align="center" mb="4">
+                  Espresso Maker: Profitec Pro 500
+                </Text>
                 <Image
                   src="/static/images/pro_500.jpeg"
                   alt="profile-pic"
                   width={320}
-                  height={206}
+                  height={320}
+                  className="rounded-full object-cover"
                 />
               </Box>
             </SimpleGrid>
