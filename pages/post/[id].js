@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import ReactMarkdown from "react-markdown";
+import { Image } from "@chakra-ui/react";
 
 export default function BlogDetail({ apiBaseUrl, post }) {
   return (
@@ -9,10 +10,11 @@ export default function BlogDetail({ apiBaseUrl, post }) {
       initial={{ opacity: 0, scale: 0.5 }}
       animate={{ opacity: 1, scale: 1 }}
     >
-      <img
+      <Image
         className="thumbnail rounded-xl h-96 w-full object-cover"
-        src={apiBaseUrl + post.data.attributes.thumbnail.data.attributes.url}
-      />
+        src={apiBaseUrl + post.data.attributes.thumbnail.data?.attributes.url}
+        fallbackSrc="https://via.placeholder.com/150"
+      ></Image>
       <p className="text-4xl font-bold mt-4">{post.data.attributes.title}</p>
       <ReactMarkdown
         className="mt-4"

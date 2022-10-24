@@ -117,7 +117,7 @@ export default function AboutMe({ apiBaseUrl, techStacks, softwareList }) {
         animate={{ opacity: 1, scale: 1 }}
       >
         {/* Part 1 */}
-        <Flex h="100vh" id="part-1">
+        <Flex h="96vh" id="part-1">
           <Center w="40vw">
             <VStack>
               <Heading alignSelf="flex-start">Hi, I am Raymond,</Heading>

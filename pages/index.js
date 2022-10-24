@@ -5,9 +5,9 @@ import {
   Heading,
   Box,
   InputGroup,
-  InputLeftElement,
   Input,
   InputRightElement,
+  Image,
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 
@@ -39,7 +39,10 @@ export default function Home({ apiBaseUrl, posts }) {
         <div className="posts-section">
           <Heading className="text-4xl mb-4 font-bold">Posts</Heading>
           <InputGroup mb="8">
-            <Input placeholder="Search for a post..." onInput={(e) => setQuery(e.target.value)} />
+            <Input
+              placeholder="Search for a post..."
+              onInput={(e) => setQuery(e.target.value)}
+            />
             <InputRightElement children={<SearchIcon color="green.500" />} />
           </InputGroup>
 
@@ -66,13 +69,14 @@ export default function Home({ apiBaseUrl, posts }) {
                       onClick={() => toPostDetail(post.id)}
                     >
                       <div className="thumbnail h-60 w-full object-cover overflow-hidden">
-                        <img
+                        <Image
                           className="w-full h-full hover:scale-125 duration-300"
                           src={
                             apiBaseUrl +
-                            post.attributes.thumbnail.data.attributes.url
+                            post.attributes.thumbnail.data?.attributes.url
                           }
-                        />
+                          fallbackSrc="https://via.placeholder.com/150"
+                        ></Image>
                       </div>
                       <div className="post-card-body p-4">
                         <h3 className="title text-lg font-bold mb-2">
