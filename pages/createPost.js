@@ -12,13 +12,13 @@ export default function createPost() {
 
   const postThumbnailRef = useRef(null);
 
-  // const [editorState, setEditorState] = useState(() =>
-  //   EditorState.createEmpty()
-  // );
+  const [editorState, setEditorState] = useState(() =>
+    EditorState.createEmpty()
+  );
 
-  // const onEditorStateChange = (e) => {
-  //   setEditorState(e);
-  // };
+  const onEditorStateChange = (e) => {
+    setEditorState(e);
+  };
 
   const submit = async () => {
     const apiBaseUrl = "http://localhost:1337";
@@ -30,7 +30,7 @@ export default function createPost() {
     const formData = new FormData();
     formData.append("files", postThumbnail);
     try {
-      const uploadRes = await axios.post(`${apiBaseUrl}/upload`, formData, {
+      const uploadRes = await axios.post(`${apiBaseUrl}/api/upload`, formData, {
         headers: {
           Authorization:
             "Bearer 75d6251a970ae2df91155ef73012b391bae96e1a721dec76144bdabddc95c2aada9d4ea4d07f19b3bf49f4e5a6cc0a4a657b4be1b0b07a3351a834c1be075803bbe335c790887983e46bd85486ce7d0c3363457e3eaa218f0791cabf5fd72bca10f760e4d41032ef3ef16a61a03bd2ce0fe3a7e4649efe894f7efb07702a362e",
@@ -75,13 +75,13 @@ export default function createPost() {
         <FormLabel>Thumbnail</FormLabel>
         <Input type="file" ref={postThumbnailRef} />
       </FormControl>
-      {/* <Editor
+      <Editor
         editorState={editorState}
         toolbarClassName="toolbarClassName"
         wrapperClassName="wrapperClassName"
         editorClassName="editorClassName"
         onEditorStateChange={onEditorStateChange}
-      /> */}
+      />
       <button onClick={submit}>Submit</button>
     </div>
   );
