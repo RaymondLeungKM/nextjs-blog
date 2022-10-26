@@ -1,8 +1,10 @@
 import { motion } from "framer-motion";
 import ReactMarkdown from "react-markdown";
-import { Image } from "@chakra-ui/react";
+import { Box, Image, Text } from "@chakra-ui/react";
 
 export default function BlogDetail({ apiBaseUrl, post }) {
+  const comments = post.data.attributes.comments.data;
+
   return (
     <motion.div
       layout
@@ -21,18 +23,48 @@ export default function BlogDetail({ apiBaseUrl, post }) {
         children={post.data.attributes.content}
         escapedhtml={false}
       />
+      <Box className="comments">
+        <Text>Comments:</Text>
+        {comments.length > 0 &&
+          comments.map((comment) => (
+            <Box key={comment.id}>
+              <Text>{comment.attributes.content}</Text>
+              <Text>Published at: {comment.attributes.publishedAt}</Text>
+              <Text>
+                Published by: {comment.attributes.user.data.attributes.username}
+              </Text>
+              
+              {comment.attributes.child_comments.data.length > 0 && comment.attributes.child_comments.data.map(child_comment =>(
+                <Box key={child_comment.id}>
+                  <Text>{child_comment.attributes.content}</Text>
+                  <Text>
+                    Published at: {child_comment.attributes.publishedAt}
+                  </Text>
+                  <Text>
+                    Published by:
+                    {child_comment.attributes.user.data.attributes.username}
+                  </Text>
+                </Box>
+              ))}
+            </Box>
+          ))}
+        {comments.length == 0 && <Text>No comments yet!</Text>}
+      </Box>
     </motion.div>
   );
 }
 
 export async function getStaticProps({ params }) {
   const apiBaseUrl = "http://localhost:1337";
-  const res = await fetch(`${apiBaseUrl}/api/blogs/${params.id}?populate=*`, {
-    headers: {
-      Authorization:
-        "Bearer 75d6251a970ae2df91155ef73012b391bae96e1a721dec76144bdabddc95c2aada9d4ea4d07f19b3bf49f4e5a6cc0a4a657b4be1b0b07a3351a834c1be075803bbe335c790887983e46bd85486ce7d0c3363457e3eaa218f0791cabf5fd72bca10f760e4d41032ef3ef16a61a03bd2ce0fe3a7e4649efe894f7efb07702a362e",
-    },
-  });
+  const res = await fetch(
+    `${apiBaseUrl}/api/blogs/${params.id}?populate[0]=thumbnail&populate[1]=comments&populate[2]=comments.child_comments&populate[3]=comments.user&populate[4]=comments.child_comments.user`,
+    {
+      headers: {
+        Authorization:
+          "Bearer 75d6251a970ae2df91155ef73012b391bae96e1a721dec76144bdabddc95c2aada9d4ea4d07f19b3bf49f4e5a6cc0a4a657b4be1b0b07a3351a834c1be075803bbe335c790887983e46bd85486ce7d0c3363457e3eaa218f0791cabf5fd72bca10f760e4d41032ef3ef16a61a03bd2ce0fe3a7e4649efe894f7efb07702a362e",
+      },
+    }
+  );
   const post = await res.json();
 
   return {
