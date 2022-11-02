@@ -1,12 +1,24 @@
 import { createRef, useRef, useState } from "react";
-import { Editor } from "react-draft-wysiwyg";
+// import { Editor } from "react-draft-wysiwyg";
 import { convertToRaw, EditorState } from "draft-js";
-import draftToHtml from "draftjs-to-html";
-import draftToMarkdown from "draftjs-to-markdown";
+// import draftToHtml from "draftjs-to-html";
+// import draftToMarkdown from "draftjs-to-markdown";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import axios from "axios";
 import { FormControl, FormLabel, Input, useToast } from "@chakra-ui/react";
 import { useRouter } from "next/router";
+
+import dynamic from "next/dynamic";
+// import { Editor } from "react-draft-wysiwyg";
+const Editor = dynamic(
+  () => import('react-draft-wysiwyg').then(mod => mod.Editor),
+  { ssr: false }
+)
+// import draftToMarkdown from "draftjs-to-markdown";
+const draftToMarkdown = dynamic(
+  () => import("draftjs-to-markdown"),
+  { ssr: false }
+)
 
 export default function createPost() {
   const router = useRouter();
