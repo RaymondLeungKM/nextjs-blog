@@ -124,19 +124,19 @@ export default function Navbar() {
     <Flex
       ref={ref}
       alignItems="center"
-      className="navbar h-[4vh] w-full px-8 py-4 bg-blue-600 dark:bg-teal-800 text-white text-xl font-bold"
+      className="navbar w-full px-8 py-4 bg-blue-600 dark:bg-teal-800 text-white text-xl font-bold"
     >
-      <Box className="logo grid place-items-center">BLOG</Box>
-      <Flex className="nav-menu-pc flex-1 pl-4 hidden items-center sm:flex">
+      <Box className="logo grid place-items-center">DevRay</Box>
+      <div className="nav-menu-pc flex-1 pl-4 hidden items-center sm:flex">
         <ul className="flex flex-1 gap-4">
           <li>
             <Link href="/">Home</Link>
           </li>
           <li>
-            <Link href="/about-me">About Me</Link>
+            <Link href="/coffee">Coffee</Link>
           </li>
           <li>
-            <Link href="/coffee">Coffee</Link>
+            <Link href="/blog">Blog</Link>
           </li>
         </ul>
         <ul className="rightMenu right-0 flex gap-4 items-center">
@@ -166,7 +166,7 @@ export default function Navbar() {
             </>
           )}
         </ul>
-      </Flex>
+      </div>
       <div className="nav-menu-m flex-1 flex sm:hidden justify-end">
         <svg
           className="cursor-pointer"
@@ -213,10 +213,10 @@ export default function Navbar() {
                   <Link href="/">Home</Link>
                 </li>
                 <li onClick={closeMobileMenuHandler}>
-                  <Link href="/about-me">About Me</Link>
+                  <Link href="/coffee">Coffee</Link>
                 </li>
                 <li onClick={closeMobileMenuHandler}>
-                  <Link href="/about-me">Coffee</Link>
+                  <Link href="/blog">Blog</Link>
                 </li>
                 <li className="h-7">
                   <Button size="xs" onClick={toggleColorMode}>

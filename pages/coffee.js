@@ -15,8 +15,12 @@ import {
 export default function Coffee() {
   return (
     <>
-      <Center h="96vh" flexDirection="column" justifyContent="space-evenly">
-        <Heading lineHeight="tall" align="center" mb="4">
+      <Center
+        flexDirection="column"
+        justifyContent="space-evenly"
+        className="mt-8 md:mt-0"
+      >
+        <Heading lineHeight="tall" align="center" className="mb-8 md:mb-4">
           <Highlight
             query={["mature", "black"]}
             styles={{ px: "2", py: "1", rounded: "full", bg: "teal.100" }}
@@ -25,12 +29,12 @@ export default function Coffee() {
           </Highlight>
         </Heading>
         <Image
+          className="w-[80vw] md:w-[50vw]"
           src="/static/images/coffee-laptop.jpg"
-          w="50vw"
           mx="auto"
           borderRadius="10"
         ></Image>
-        <Text fontSize="xl">
+        <Text fontSize="xl" className="mt-8">
           When you first started drinking coffee, 99.9% of the time you would go
           for a milk coffee such as cappucino/latte/mocha. There's absolutely
           normal as starters usually find coffee to be bitter and unenjoyable on
@@ -51,7 +55,7 @@ export default function Coffee() {
           black coffee from then on.
         </Text>
       </Center>
-      <Center h="100vh" flexDirection="column" justifyContent="space-evenly">
+      <Center flexDirection="column" justifyContent="space-evenly" className="md:h-[100vh]">
         <Image
           src="/static/images/black-coffee.avif"
           h="60vh"
@@ -69,17 +73,17 @@ export default function Coffee() {
           chocolate,almond and sometimes vanilla.
         </Text>
       </Center>
-      <Flex>
+      <Flex className="flex-col md:flex-row">
         <Image
           src="/static/images/fruity_coffee.jpg"
-          w="30vw"
+          className="w-[80vw] md:w-[30vw]"
           mx="auto"
           my="8"
           borderRadius="10"
         ></Image>
         <Image
           src="/static/images/nutty_coffee.jpg"
-          w="30vw"
+          className="w-[80vw] md:w-[30vw]"
           mx="auto"
           my="8"
           objectFit="fill"
@@ -96,14 +100,20 @@ export default function Coffee() {
         </Highlight>
         <Highlight
           query={["nutty", "milk coffee"]}
-          styles={{ px: "2", py: "1", rounded: "full", bg: "gray.700", color: "white" }}
+          styles={{
+            px: "2",
+            py: "1",
+            rounded: "full",
+            bg: "gray.700",
+            color: "white",
+          }}
         >
           , while nutty coffee is better suited for milk coffee.
         </Highlight>
       </Heading>
       <Box flexDirection="column" justifyContent="space-between">
         <Box mb="4">
-          <Heading>Coffee Bean Suggestions</Heading>
+          <Heading className="mb-4">Coffee Bean Suggestions</Heading>
           <Text fontSize="xl">
             Here is a couple of suggestions of coffee beans for you to try when
             you started to step in the world of black coffee: (My personal
@@ -127,9 +137,10 @@ export default function Coffee() {
           </OrderedList>
         </Box>
         <Box mb="4">
-          <Heading>Coffee shop suggestions</Heading>
+          <Heading className="mb-4">Coffee shop suggestions</Heading>
+          {/* Lets try to implement googlemap api here just for the sake of showing that I know how */}
           <OrderedList fontSize="xl">
-            <ListItem>Cafe Revol</ListItem>
+            <ListItem>Cafe Revol (It is my all-time favourite cafe! A must try! Their handdrip is really good! And their houseblend, especially thieir fruity aka artistic blend is among the best you can taste in HK)</ListItem>
             <ListItem>Espresso Alchemy</ListItem>
             <ListItem>Reaction Coffee Roasters</ListItem>
           </OrderedList>
