@@ -120,6 +120,14 @@ export default function Navbar() {
     console.log("jwt=", jwt);
   }, [jwt]);
 
+  useEffect(() => {
+    if (colorMode === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  },[colorMode])
+
   return (
     <Flex
       ref={ref}
@@ -190,7 +198,7 @@ export default function Navbar() {
         <AnimatePresence>
           {showMobileMenu && (
             <motion.div
-              className="mobile-menu h-screen w-screen bg-zinc-400 dark:bg-slate-800 absolute left-0 top-0 z-10"
+              className="mobile-menu h-screen w-screen bg-blue-600 dark:bg-slate-800 absolute left-0 top-0 z-10"
               initial={{ opacity: 0, left: "-100vw" }}
               animate={{ opacity: 1, left: 0 }}
               exit={{ opacity: 0, left: "-100vw" }}

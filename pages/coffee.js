@@ -55,7 +55,11 @@ export default function Coffee() {
           black coffee from then on.
         </Text>
       </Center>
-      <Center flexDirection="column" justifyContent="space-evenly" className="md:h-[100vh]">
+      <Center
+        flexDirection="column"
+        justifyContent="space-evenly"
+        className="md:h-[100vh]"
+      >
         <Image
           src="/static/images/black-coffee.avif"
           h="60vh"
@@ -96,7 +100,7 @@ export default function Coffee() {
           styles={{ px: "2", py: "1", rounded: "full", bg: "red.400" }}
         >
           As a result, fruity coffee is better for Americano (adding hot water
-          to espresso) / Long Black (adding esprsso to hot water)
+          to espresso) / Long Black (adding espresso to hot water)
         </Highlight>
         <Highlight
           query={["nutty", "milk coffee"]}
@@ -140,9 +144,55 @@ export default function Coffee() {
           <Heading className="mb-4">Coffee shop suggestions</Heading>
           {/* Lets try to implement googlemap api here just for the sake of showing that I know how */}
           <OrderedList fontSize="xl">
-            <ListItem>Cafe Revol (It is my all-time favourite cafe! A must try! Their handdrip is really good! And their houseblend, especially thieir fruity aka artistic blend is among the best you can taste in HK)</ListItem>
-            <ListItem>Espresso Alchemy</ListItem>
-            <ListItem>Reaction Coffee Roasters</ListItem>
+            <ListItem className="mb-4">
+              <Text>
+                Cafe Revol (It is my all-time favourite cafe! A must try! Their
+                handdrip is really good! And their houseblend, especially thieir
+                fruity aka artistic blend is among the best you can taste in HK)
+              </Text>
+              <Image
+                className="w-full my-4 md:w-[40vw]"
+                src="/static/images/cafe_revol.jpeg"
+                mx="auto"
+                borderRadius="10"
+              />
+              <Text>Suggested dishes: Carbonara, Chicken Breast, Hand drip</Text>
+              <Text>
+                Address: Shop 5, G/F, Fortune Terrace, 4-16 Tak Shing Street,
+                Jordan, Hong Kong
+              </Text>
+            </ListItem>
+            <ListItem className="mb-4">
+              <Text>
+                Espresso Alchemy (They have a couple of branches but personally
+                I prefer the one at Harbour City TST)
+              </Text>
+              <Image
+                className="w-full my-4 md:w-[40vw]"
+                src="/static/images/espresso-alchemy.jpg"
+                mx="auto"
+                borderRadius="10"
+              />
+              <Text>Suggested dishes: Chicken Breast / Smoke Salmon Salad, Hand drip, Single Origin Brew</Text>
+              <Text>
+                Address: 3-27 Canton Road Shop 104, G/F, Harbour City, Gateway
+                Arcade, Tsim Sha Tsui, Hong Kong China
+              </Text>
+            </ListItem>
+            <ListItem>
+              <Text>Reaction Coffee Roasters</Text>
+              <Image
+                className="w-full my-4 md:w-[40vw]"
+                src="/static/images/reaction-coffee-roasters.jpg"
+                mx="auto"
+                borderRadius="10"
+              />
+              <Text>Suggested dishes: Black Burger with sweet potato fries, Hand drip</Text>
+              <Text>
+                Address: Shop A, G/F, Lyton Building, 32-48 Mody Road, Tsim Sha
+                Tsui
+              </Text>
+            </ListItem>
           </OrderedList>
         </Box>
       </Box>
