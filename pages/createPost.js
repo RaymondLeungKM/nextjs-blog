@@ -15,10 +15,10 @@ const Editor = dynamic(
   { ssr: false }
 )
 // import draftToMarkdown from "draftjs-to-markdown";
-const draftToMarkdown = dynamic(
-  () => import("draftjs-to-markdown"),
-  { ssr: false }
-)
+// const draftToMarkdown = dynamic(
+//   () => import("draftjs-to-markdown"),
+//   { ssr: false }
+// )
 
 export default function createPost() {
   const router = useRouter();
@@ -53,10 +53,12 @@ export default function createPost() {
             "Bearer 75d6251a970ae2df91155ef73012b391bae96e1a721dec76144bdabddc95c2aada9d4ea4d07f19b3bf49f4e5a6cc0a4a657b4be1b0b07a3351a834c1be075803bbe335c790887983e46bd85486ce7d0c3363457e3eaa218f0791cabf5fd72bca10f760e4d41032ef3ef16a61a03bd2ce0fe3a7e4649efe894f7efb07702a362e",
         },
       });
-      console.log(uploadRes);
+      // console.log(uploadRes);
 
       if (uploadRes.status == 200) {
         const imageId = uploadRes.data[0].id;
+
+        const draftToMarkdown = (await import('draftjs-to-markdown')).default;
 
         const postContent = draftToMarkdown(
           convertToRaw(editorState.getCurrentContent())
@@ -89,7 +91,10 @@ export default function createPost() {
             isClosable: true,
             position: "top-right",
           });
-          router.push("/");
+
+          // router.push("/blog");
+          // console.log(res);
+          router.push(`/post/${res.data.data.id}`)
         } else {
           throw new Error("Create new post failed");
         }
