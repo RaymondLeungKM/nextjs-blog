@@ -79,7 +79,7 @@ export async function getStaticPaths() {
   const res = await fetch("http://localhost:1337/api/blogs?populate=*", {
     headers: {
       Authorization:
-        "Bearer 97b096bd56ef183d13f73ef83431a7f7dcd98641d92335b442bf94a3f907087bf5b7be79da0100e24b74261aeb68311cf49f403eb34e8a69f3176d6395f5f6843f56920d247e539d4d9afdc0db14b4a34530f36a70aef7c185eb0bf2bec190317954f6f8d6cc844a8204f56f58ff1e3fbd1c4d3e4c8ca2f9bf4a1cc629f0345b",
+        "Bearer 31aa07d5c4e57eaea338c3091acd9c1d5d1bd046374c5a1f2841d154c56ff8baab69fa8257a9501b868c3d87372cf37589a97f66178030fbc39dc3efd834c5e6c22df6a5e8623d0e93a411efee874429100b86927ac09b7eafa42b3d5254df639303e321e842d8b862c540d2865e64f6780791900a21891a7c2e312edd7e34c1",
     },
   });
   const posts = await res.json();

@@ -13,7 +13,7 @@ export default function Layout({ children }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <DynamicNavbar />
-      <main className="my-4 mx-8 md:w-[60vw] md:mx-auto">{children}</main>
+      <main className="my-4 mx-8 md-w-[80vw] md:w-[70vw] lg:w-[60vw] md:mx-auto">{children}</main>
     </>
   );
 }

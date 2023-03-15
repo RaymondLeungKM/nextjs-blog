@@ -14,3 +14,46 @@ html {
 .detail p {
     margin: 1rem 0;
 }
+
+/* File Upload Button */
+.image-upload input {
+    color: transparent;
+    height: 20rem;
+    z-index: 99;
+}
+.image-upload input::-webkit-file-upload-button {
+    display: none;
+}
+.image-upload input:hover + img {
+    width: 85%;
+    height: 65%;
+}
+.image-upload img {
+    position: absolute;
+    border-radius: 1rem;
+    width: 80%;
+    height: 60%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.3s ease;
+}
+.image-upload p {
+    position: absolute;
+    left: 50%;
+    bottom: 5%;
+    transform: translate(-50%);
+}
+
+/* Create Post Editor */
+.editor-wrapper .rdw-editor-toolbar.editor-toolbar {
+    border-radius: var(--chakra-radii-md);
+}
+
+.editor-wrapper .editor-editor {
+    margin: 1rem 0;
+    border: 1px solid;
+    border-color: inherit;
+    border-radius: var(--chakra-radii-md);
+    padding: 1rem;
+}

@@ -321,7 +321,7 @@ export async function getStaticProps() {
   const res = await fetch(`${apiBaseUrl}/api/Skills?populate=*`, {
     headers: {
       Authorization:
-        "Bearer 75d6251a970ae2df91155ef73012b391bae96e1a721dec76144bdabddc95c2aada9d4ea4d07f19b3bf49f4e5a6cc0a4a657b4be1b0b07a3351a834c1be075803bbe335c790887983e46bd85486ce7d0c3363457e3eaa218f0791cabf5fd72bca10f760e4d41032ef3ef16a61a03bd2ce0fe3a7e4649efe894f7efb07702a362e",
+        "Bearer 31aa07d5c4e57eaea338c3091acd9c1d5d1bd046374c5a1f2841d154c56ff8baab69fa8257a9501b868c3d87372cf37589a97f66178030fbc39dc3efd834c5e6c22df6a5e8623d0e93a411efee874429100b86927ac09b7eafa42b3d5254df639303e321e842d8b862c540d2865e64f6780791900a21891a7c2e312edd7e34c1",
     },
   });
   const techStacks = await res.json();
@@ -329,7 +329,7 @@ export async function getStaticProps() {
   const res2 = await fetch(`${apiBaseUrl}/api/Softwares?populate=*`, {
     headers: {
       Authorization:
-        "Bearer 75d6251a970ae2df91155ef73012b391bae96e1a721dec76144bdabddc95c2aada9d4ea4d07f19b3bf49f4e5a6cc0a4a657b4be1b0b07a3351a834c1be075803bbe335c790887983e46bd85486ce7d0c3363457e3eaa218f0791cabf5fd72bca10f760e4d41032ef3ef16a61a03bd2ce0fe3a7e4649efe894f7efb07702a362e",
+        "Bearer 31aa07d5c4e57eaea338c3091acd9c1d5d1bd046374c5a1f2841d154c56ff8baab69fa8257a9501b868c3d87372cf37589a97f66178030fbc39dc3efd834c5e6c22df6a5e8623d0e93a411efee874429100b86927ac09b7eafa42b3d5254df639303e321e842d8b862c540d2865e64f6780791900a21891a7c2e312edd7e34c1",
     },
   });
   const softwareList = await res2.json();
